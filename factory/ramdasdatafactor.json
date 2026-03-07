@@ -1,0 +1,9 @@
+{
+	"name": "ramdasdatafactor",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "3038db2a-2192-4856-8b27-b8fe90bfef23",
+		"tenantId": "b75654f2-f8e1-4fcc-9f00-8e203ad5786d"
+	}
+}

@@ -1,0 +1,122 @@
+{
+	"name": "8_datasetWithMuitpleVariable",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data multipe parameter",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "GetFileName",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "BinarySource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "BinaryReadSettings"
+						}
+					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "Dataset_muit_src",
+						"type": "DatasetReference",
+						"parameters": {
+							"floder_name": {
+								"value": "@variables('folder_name')",
+								"type": "Expression"
+							},
+							"filer_name": {
+								"value": "@variables('file_Name')",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Dataset_loading",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "getFolder",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "folder_name",
+					"value": "inbounds"
+				}
+			},
+			{
+				"name": "GetFileName",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "getFolder",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "file_Name",
+					"value": "Customers.csv"
+				}
+			}
+		],
+		"parameters": {
+			"FloderName": {
+				"type": "string"
+			},
+			"FileName": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"folder_name": {
+				"type": "String"
+			},
+			"file_Name": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-03-06T09:26:56Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

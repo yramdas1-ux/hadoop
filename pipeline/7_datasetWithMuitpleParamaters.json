@@ -1,0 +1,66 @@
+{
+	"name": "7_datasetWithMuitpleParamaters",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data multipe parameter",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "BinarySource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "BinaryReadSettings"
+						}
+					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "Dataset_muit_src",
+						"type": "DatasetReference",
+						"parameters": {
+							"floder_name": "srcfiles",
+							"filer_name": "accounts.csv"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Dataset_loading",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"parameters": {
+			"FloderName": {
+				"type": "string"
+			},
+			"FileName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-03-06T08:58:18Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

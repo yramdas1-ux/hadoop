@@ -1,0 +1,105 @@
+{
+	"name": "1_set_variable_activity",
+	"properties": {
+		"activities": [
+			{
+				"name": "getPersonaName",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "prsn_name",
+					"value": "Ravi"
+				}
+			},
+			{
+				"name": "getMessage",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "getPersonlocation",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "message",
+					"value": {
+						"value": "@concat('person name is ',variables('prsn_name'),' Age was',variables('age'),'and location was ',variables('location'))",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "getPersonAge",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "getPersonaName",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "age",
+					"value": 30
+				}
+			},
+			{
+				"name": "getPersonlocation",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "getPersonAge",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "location",
+					"value": "chennai"
+				}
+			}
+		],
+		"variables": {
+			"prsn_name": {
+				"type": "String"
+			},
+			"message": {
+				"type": "String"
+			},
+			"age": {
+				"type": "Integer"
+			},
+			"location": {
+				"type": "String",
+				"defaultValue": "hyderaabad"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-03-06T09:20:27Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

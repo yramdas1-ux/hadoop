@@ -1,0 +1,34 @@
+{
+	"name": "Dataset_muit_src",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linked_service_test",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"floder_name": {
+				"type": "string"
+			},
+			"filer_name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().filer_name",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().floder_name",
+					"type": "Expression"
+				},
+				"fileSystem": "devcontiner"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

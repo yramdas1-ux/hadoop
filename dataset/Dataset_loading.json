@@ -1,0 +1,19 @@
+{
+	"name": "Dataset_loading",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linked_service_test",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "outbounds",
+				"fileSystem": "devcontiner"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,105 @@
+{
+	"name": "4_set_variable",
+	"properties": {
+		"activities": [
+			{
+				"name": "getname",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Per_name",
+					"value": "ramdas"
+				}
+			},
+			{
+				"name": "getage",
+				"description": "30",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "getname",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "per_age",
+					"value": "30"
+				}
+			},
+			{
+				"name": "getlocation",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "getage",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "per_location",
+					"value": "hyderbad"
+				}
+			},
+			{
+				"name": "final_message",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "getlocation",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "message",
+					"value": {
+						"value": "@concat('person name ',variables('Per_name'),'and person age ',variables('per_age'),' and location ',variables('per_location'))",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"Per_name": {
+				"type": "String"
+			},
+			"per_age": {
+				"type": "String"
+			},
+			"per_location": {
+				"type": "String"
+			},
+			"message": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-03-05T11:48:10Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,19 @@
+{
+	"name": "dateset_wild",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linked_service_test",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "inbounds",
+				"fileSystem": "devcontiner"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

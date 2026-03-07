@@ -1,0 +1,108 @@
+{
+	"name": "2_set_2_variable-activities",
+	"properties": {
+		"activities": [
+			{
+				"name": "getPersonName",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "person_name",
+					"value": " Ramdas "
+				}
+			},
+			{
+				"name": "getPersonAge",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "getPersonName",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "person_age",
+					"value": " 30 "
+				}
+			},
+			{
+				"name": "getPersonLocation",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "getPersonAge",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "person_location",
+					"value": " Hyderabad "
+				}
+			},
+			{
+				"name": "getMessage",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "getPersonLocation",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "message",
+					"value": {
+						"value": "@concat('person name is',variables('person_name'),'and age',variables('person_age'),'and location was',variables('person_location'))",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"person_name": {
+				"type": "String"
+			},
+			"person_age": {
+				"type": "String"
+			},
+			"person_location": {
+				"type": "String",
+				"defaultValue": "chennai"
+			},
+			"preson_salary": {
+				"type": "String"
+			},
+			"message": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-03-06T09:20:27Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

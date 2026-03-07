@@ -1,0 +1,144 @@
+{
+	"name": "9_currentDataPipaline",
+	"properties": {
+		"description": "Create current date with UTC and convert to ddMMYYY ",
+		"activities": [
+			{
+				"name": "getCurrentdate",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "currentdate",
+					"value": {
+						"value": "@utcNow()",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "convert into date",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "getCurrentdate",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "file_name_date",
+					"value": {
+						"value": "@formatDateTime(variables('currentdate'),'ddMMyyy')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "get_file_name",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "convert into date",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "file_name",
+					"value": {
+						"value": "@concat('orders_',variables('file_name_date'),'.txt')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "get_file_name",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "BinarySource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "BinaryReadSettings"
+						}
+					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "Dataset_Src",
+						"type": "DatasetReference",
+						"parameters": {
+							"Scr_name": {
+								"value": "@variables('file_name')",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Dataset_loading",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"variables": {
+			"currentdate": {
+				"type": "String"
+			},
+			"file_name_date": {
+				"type": "String"
+			},
+			"file_name": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-03-07T06:50:52Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

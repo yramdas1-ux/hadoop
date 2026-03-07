@@ -1,0 +1,170 @@
+{
+	"name": "10_previous_date_copy_activity",
+	"properties": {
+		"activities": [
+			{
+				"name": "getCurrentUTC",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "current_date",
+					"value": {
+						"value": "@utcNow()",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Previous_date",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "getCurrentUTC",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "pervious_date",
+					"value": {
+						"value": "@adddays(variables('current_date'),-1)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "filedate",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Previous_date",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "file_date",
+					"value": {
+						"value": "@formatDateTime(variables('pervious_date'),'ddMMyyyy')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "src_file_name",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "filedate",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "scr_file_name",
+					"value": {
+						"value": "@concat('orders_',variables('file_date'),'.txt')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "src_file_name",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "BinarySource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "BinaryReadSettings"
+						}
+					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "Dataset_Src",
+						"type": "DatasetReference",
+						"parameters": {
+							"Scr_name": {
+								"value": "@variables('scr_file_name')",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Dataset_loading",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"variables": {
+			"current_date": {
+				"type": "String"
+			},
+			"pervious_date": {
+				"type": "String"
+			},
+			"file_date": {
+				"type": "String"
+			},
+			"scr_file_name": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-03-07T07:32:14Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
