@@ -1,0 +1,17 @@
+{
+	"name": "Google_clode_stroage",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "GoogleCloudStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "GoogleCloudStorageLocation",
+				"bucketName": "ramdas143"
+			}
+		}
+	}
+}
