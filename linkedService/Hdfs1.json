@@ -1,0 +1,12 @@
+{
+	"name": "Hdfs1",
+	"properties": {
+		"annotations": [],
+		"type": "Hdfs",
+		"typeProperties": {
+			"url": "http://quickstart.cloudera:50075/",
+			"authenticationType": "Anonymous",
+			"userName": "hdfs"
+		}
+	}
+}
