@@ -1,12 +1,12 @@
 {
-	"name": "Dataset_Src",
+	"name": "ds_gen2_outbound_folder",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "linked_service_test",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"Scr_name": {
+			"foldername": {
 				"type": "string"
 			}
 		},
@@ -16,13 +16,12 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": {
-					"value": "@dataset().Scr_name",
+					"value": "@dataset().foldername",
 					"type": "Expression"
 				},
-				"folderPath": "inbounds",
+				"folderPath": "outbounds",
 				"fileSystem": "devcontiner"
 			}
 		}
-	},
-	"type": "Microsoft.DataFactory/factories/datasets"
+	}
 }
