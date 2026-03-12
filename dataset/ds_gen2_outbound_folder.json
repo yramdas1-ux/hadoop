@@ -1,0 +1,26 @@
+{
+	"name": "ds_gen2_outbound_folder",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linked_service_test",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"foldername": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "@concat('outbound/',dataset().foldername)",
+					"type": "Expression"
+				},
+				"fileSystem": "devcontiner"
+			}
+		}
+	}
+}
