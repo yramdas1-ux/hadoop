@@ -1,0 +1,23 @@
+{
+	"name": "Hive1",
+	"properties": {
+		"annotations": [],
+		"type": "Hive",
+		"version": "2.0",
+		"typeProperties": {
+			"host": "quickstart.cloudera",
+			"port": 443,
+			"serverType": "HiveServer2",
+			"thriftTransportProtocol": "HTTP",
+			"authenticationType": "Anonymous",
+			"httpPath": "http://quickstart.cloudera:7180/cmf/hardware/hosts/1/status",
+			"enableSsl": true,
+			"storageReference": {
+				"referenceName": "linked_service_test",
+				"type": "LinkedServiceReference"
+			},
+			"enableServerCertificateValidation": true,
+			"password": false
+		}
+	}
+}
