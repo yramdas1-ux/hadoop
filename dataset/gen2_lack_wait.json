@@ -1,0 +1,19 @@
+{
+	"name": "gen2_lack_wait",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linked_service_test",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "order.txt",
+				"folderPath": "inbounds",
+				"fileSystem": "devcontiner"
+			}
+		}
+	}
+}
