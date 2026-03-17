@@ -1,0 +1,84 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "ramdasdatafactor"
+		},
+		"AmazonS31_secretAccessKey": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"AzureDatabricks1_accessToken": {
+			"value": ""
+		},
+		"AzureSqlDatabase1_password": {
+			"value": ""
+		},
+		"GoogleCloudStorage1_secretAccessKey": {
+			"value": ""
+		},
+		"MySql1_password": {
+			"value": ""
+		},
+		"azure_data_stroage_accountKey": {
+			"value": ""
+		},
+		"linked_service_test_accountKey": {
+			"value": ""
+		},
+		"AmazonS31_properties_typeProperties_accessKeyId": {
+			"value": "AKIAYKLSZWQJ6BM2G753"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://ramdas.dfs.core.windows.net/"
+		},
+		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
+			"value": "0218-121552-hbeljnaa"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"value": "ramdassqlserver.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"value": "Ramdas_Database"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_userName": {
+			"value": "ramdas"
+		},
+		"GoogleCloudStorage1_properties_typeProperties_accessKeyId": {
+			"value": "GOOG7D3C66N7T63EOPVGIB5H"
+		},
+		"Hdfs1_properties_typeProperties_url": {
+			"value": "http://quickstart.cloudera:50075/"
+		},
+		"Hdfs1_properties_typeProperties_userName": {
+			"value": "hdfs"
+		},
+		"Hive1_properties_typeProperties_host": {
+			"value": "quickstart.cloudera"
+		},
+		"MySql1_properties_typeProperties_server": {
+			"value": "localhost"
+		},
+		"MySql1_properties_typeProperties_database": {
+			"value": "ramdasdb"
+		},
+		"MySql1_properties_typeProperties_username": {
+			"value": "root"
+		},
+		"azure_data_stroage_properties_typeProperties_url": {
+			"value": "https://ramdas.dfs.core.windows.net/"
+		},
+		"linked_service_test_properties_typeProperties_url": {
+			"value": "https://ramdas.dfs.core.windows.net/"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
