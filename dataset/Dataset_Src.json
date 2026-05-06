@@ -2,7 +2,7 @@
 	"name": "Dataset_Src",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "linked_service_test",
+			"referenceName": "azure_data_stroage",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
@@ -15,10 +15,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": {
-					"value": "@dataset().Scr_name",
-					"type": "Expression"
-				},
+				"fileName": "emp_data.csv",
 				"folderPath": "inbounds",
 				"fileSystem": "devcontiner"
 			}
